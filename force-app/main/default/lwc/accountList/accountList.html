@@ -1,12 +1,24 @@
 <template>
-  <template if:true={accounts}>
+  <template if:true={error}>
+    <p>An error occurred while loading accounts.</p>
+    <p>{error.body ? error.body.message : error}</p>
+  </template>
+  <template if:true={hasAccounts}>
     <ul>
       <template for:each={accounts} for:item="acc">
-        <li key={acc.Id}>{acc.Name} - {acc.AnnualRevenue}</li>
+        <li key={acc.Id}>
+          {acc.Name} - {acc.AnnualRevenue}
+          <template if:true={acc.Industry}>
+            &nbsp;| Industry: {acc.Industry}
+          </template>
+          <template if:true={acc.OwnerId}>
+            &nbsp;| Owner: {acc.OwnerId}
+          </template>
+        </li>
       </template>
     </ul>
   </template>
-  <template if:false={accounts}>
+  <template if:false={hasAccounts}>
     <p>No accounts found</p>
   </template>
 </template>
