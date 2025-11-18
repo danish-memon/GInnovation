@@ -1,0 +1,1 @@
+This folder simulates static resources (binary files are omitted in this sample).
